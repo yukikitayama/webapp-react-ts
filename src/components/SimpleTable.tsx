@@ -1,60 +1,47 @@
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import { type ReactNode } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 
-const columns = ["Start date", "End date", "Name", "Platform", "Topic"];
+type SimpleTableProps = {
+  columns: string[];
+  rows: any[];
+};
 
-const rows = [
-  {
-    id: "0",
-    startDate: "2024-05-17",
-    endDate: "2024-06-06",
-    name: "Music composition 1",
-    platform: "Udemy",
-    topic: "Music composition",
-  },
-  {
-    id: "1",
-    startDate: "2024-06-07",
-    endDate: "",
-    name: "Music composition 2",
-    platform: "Udemy",
-    topic: "Music composition",
-  },
-  {
-    id: "2",
-    startDate: "2024-07-02",
-    endDate: "",
-    name: "Music theory",
-    platform: "Udemy",
-    topic: "Music theory",
-  },
-];
+const dataToElement = (row: any) => {
+  let cells: ReactNode[] = [];
+  
+  // https://stackoverflow.com/questions/43389414/how-to-iterate-over-keys-of-a-generic-object-in-typescript
+  // https://www.typescriptlang.org/docs/handbook/2/keyof-types.html
+  let key: keyof any;
 
-const SimpleTable = () => {
+  for (key in row) {
+    if (key !== "id") {
+      const value = row[key];
+      cells.push(<TableCell>{value}</TableCell>);
+    }
+  }
+
+  return <TableRow key={row.id}>{cells}</TableRow>;
+};
+
+const SimpleTable = ({ columns, rows }: SimpleTableProps) => {
   return (
     <TableContainer>
       <Table>
         <TableHead>
           <TableRow>
-            {columns.map(column => (
+            {columns.map((column) => (
               <TableCell>{column}</TableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.id}>
-              <TableCell>{row.startDate}</TableCell>
-              <TableCell>{row.endDate}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.platform}</TableCell>
-              <TableCell>{row.topic}</TableCell>
-            </TableRow>
-          ))}
+          {rows.map((row) => dataToElement(row))}
+          {/* If not use function, https://mui.com/material-ui/react-table/#basic-table */}
         </TableBody>
       </Table>
     </TableContainer>

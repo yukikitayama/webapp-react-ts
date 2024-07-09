@@ -10,6 +10,12 @@
 react-router-dom
 ```
 
+## TypeScript
+
+- `keyof`
+  - https://www.typescriptlang.org/docs/handbook/2/keyof-types.html
+  - https://stackoverflow.com/questions/43389414/how-to-iterate-over-keys-of-a-generic-object-in-typescript
+
 ## Reference
 
 - https://mui.com/material-ui/getting-started/templates/dashboard/
