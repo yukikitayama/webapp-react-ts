@@ -15,6 +15,7 @@ import WorkIcon from '@mui/icons-material/Work';
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 // import PianoIcon from '@mui/icons-material/Piano';
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
+import CodeIcon from '@mui/icons-material/Code';
 
 import { drawerWidth } from '../parameters/parameters';
 
@@ -36,6 +37,12 @@ const listItems = (
         <WorkIcon sx={{ color: "white" }} />
       </ListItemIcon>
       <ListItemText primary="Work" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/coding">
+      <ListItemIcon>
+        <CodeIcon sx={{ color: "white" }} />
+      </ListItemIcon>
+      <ListItemText primary="Coding" />
     </ListItemButton>
     <ListItemButton component={Link} to="/music">
       <ListItemIcon>

@@ -7,6 +7,7 @@
 @emotion/styled
 @fontsource/roboto
 @mui/icons-material
+@mui/x-data-grid
 react-router-dom
 ```
 
@@ -15,6 +16,8 @@ react-router-dom
 - `keyof`
   - https://www.typescriptlang.org/docs/handbook/2/keyof-types.html
   - https://stackoverflow.com/questions/43389414/how-to-iterate-over-keys-of-a-generic-object-in-typescript
+- `(typeof ___)[number]`
+  - https://stackoverflow.com/questions/59541521/whats-the-meaning-of-typeof-arraynumber-in-typescript
 
 ## Reference
 
