@@ -27,25 +27,25 @@ const listItems = (
   <React.Fragment>
     <ListItemButton component={Link} to="/dashboard" >
       <ListItemIcon>
-        <DashboardIcon />
+        <DashboardIcon sx={{ color: "white" }} />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItemButton>
     <ListItemButton component={Link} to="/work" >
       <ListItemIcon>
-        <WorkIcon />
+        <WorkIcon sx={{ color: "white" }} />
       </ListItemIcon>
       <ListItemText primary="Work" />
     </ListItemButton>
     <ListItemButton component={Link} to="/music">
       <ListItemIcon>
-        <LibraryMusicIcon />
+        <LibraryMusicIcon sx={{ color: "white" }} />
       </ListItemIcon>
       <ListItemText primary="Music" />
     </ListItemButton>
     <ListItemButton component={Link} to="/tennis">
       <ListItemIcon>
-        <SportsTennisIcon />
+        <SportsTennisIcon sx={{ color: "white" }} />
       </ListItemIcon>
       <ListItemText primary="Tennis" />
     </ListItemButton>
@@ -88,8 +88,8 @@ const toggleIconRightStyle = {
 
 const Menu: React.FC<MenuProps> = (props) => {
   return (
-    <StyledDrawer variant="permanent" open={props.open}>
-      <Toolbar sx={toggleIconRightStyle}>
+    <StyledDrawer variant="permanent" open={props.open} >
+    <Toolbar sx={toggleIconRightStyle}>
         <IconButton onClick={props.toggleDrawer}>
           <ChevronLeftIcon />
         </IconButton>

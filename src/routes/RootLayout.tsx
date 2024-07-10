@@ -1,12 +1,33 @@
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Box from '@mui/material/Box';
+import { indigo, blueGrey } from '@mui/material/colors';
 
 import Navigation from '../components/Navigation';
 import Menu from '../components/Menu';
 import Content from '../components/Content';
 
-const defaultTheme = createTheme();
+// const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+  palette: {
+    primary: {
+      main: indigo[500]
+    },
+    secondary: {
+      main: blueGrey[500]
+    }
+  },
+  components: {
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: indigo[800],
+          color: "white"
+        }
+      }
+    }
+  }
+});
 
 const RootLayout = () => {
   const [open, setOpen] = useState(true);

@@ -38,7 +38,7 @@ const StyledAppBar = styled(AppBar, { shouldForwardProp: (prop) => prop !== 'ope
 
 const Navigation: React.FC<NavigationProps> = (props) => {
   return (
-    <StyledAppBar open={props.open}>
+    <StyledAppBar open={props.open} color="inherit">
       <Toolbar>
         <IconButton 
           onClick={props.toggleDrawer} 
@@ -51,7 +51,7 @@ const Navigation: React.FC<NavigationProps> = (props) => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap>
+        <Typography variant="h6" noWrap color="primary">
           Yuki Kitayama
         </Typography>
       </Toolbar>

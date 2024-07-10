@@ -109,10 +109,10 @@ const overview = (
 const Music = () => {
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12}>
+      <Grid item xs={12} md={5}>
         <Display title="Overview">{overview}</Display>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} md={7}>
         <Display title="Learning">
           <SimpleTable columns={columnsLearning} rows={rowsLearning} />
         </Display>
