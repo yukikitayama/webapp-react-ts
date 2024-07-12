@@ -98,7 +98,7 @@ const Menu: React.FC<MenuProps> = (props) => {
     <StyledDrawer variant="permanent" open={props.open} >
     <Toolbar sx={toggleIconRightStyle}>
         <IconButton onClick={props.toggleDrawer}>
-          <ChevronLeftIcon />
+          <ChevronLeftIcon sx={{ color: "white" }} />
         </IconButton>
       </Toolbar>
       <Divider />

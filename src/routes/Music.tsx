@@ -71,7 +71,7 @@ const rowsConcert = [
 ];
 
 const overview = (
-  <Typography paragraph>
+  <Typography component="div">
     <ul>
       <li>
         Learn music composition

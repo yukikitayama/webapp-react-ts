@@ -9,12 +9,14 @@ const columnsLearning = ["Start date", "End date", "Name", "Platform", "Topic"];
 
 const rowsCertification = [
   {
+    id: "0",
     date: "2024-01-12",
     name: "Certified Kubernetes Application Developer",
     organization: "The Cloud Native Computing Foundation",
     skill: "Kubernetes, Docker",
   },
   {
+    id: "1",
     date: "2024-03-08",
     name: "C++ Certified Entry-Level Programmer CPE",
     organization: "C++ Institute",
@@ -24,6 +26,7 @@ const rowsCertification = [
 
 const rowsLearning = [
   {
+    id: "0",
     startDate: "2024-07-02",
     endDate: "",
     name: "React & TypeScript - The Practical Guide",
@@ -31,6 +34,7 @@ const rowsLearning = [
     topic: "React, TypeScript"
   },
   {
+    id: "1",
     startDate: "2024-04-24",
     endDate: "",
     name: "Beginning C++ Programming - From Beginner to Beyond",
@@ -40,7 +44,7 @@ const rowsLearning = [
 ];
 
 const overview = (
-  <Typography paragraph>
+  <Typography component="div">
     <ul>
       <li>Coding
         <ul>
@@ -89,7 +93,7 @@ const overview = (
 );
 
 const project = (
-  <Typography paragraph>
+  <Typography component="div">
     <ul>
       <li>React/TypeScript dashboard</li>
     </ul>

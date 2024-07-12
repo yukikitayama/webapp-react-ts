@@ -21,7 +21,7 @@ const defaultTheme = createTheme({
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          backgroundColor: indigo[800],
+          backgroundColor: indigo[700],
           color: "white"
         }
       }

@@ -21,7 +21,7 @@ const dataToElement = (row: any) => {
   for (key in row) {
     if (key !== "id") {
       const value = row[key];
-      cells.push(<TableCell>{value}</TableCell>);
+      cells.push(<TableCell key={key}>{value}</TableCell>);
     }
   }
 
@@ -35,7 +35,7 @@ const SimpleTable = ({ columns, rows }: SimpleTableProps) => {
         <TableHead>
           <TableRow>
             {columns.map((column) => (
-              <TableCell>{column}</TableCell>
+              <TableCell key={column}>{column}</TableCell>
             ))}
           </TableRow>
         </TableHead>

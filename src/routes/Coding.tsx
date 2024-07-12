@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react';
 import Grid from "@mui/material/Grid";
 import { GridColDef } from "@mui/x-data-grid";
 
 import Display from "../components/Display";
 import Dataframe from "../components/Dataframe";
+import InputDisplay from "../components/InputDisplay";
 
 // https://stackoverflow.com/questions/59541521/whats-the-meaning-of-typeof-arraynumber-in-typescript
 const columns: GridColDef<(typeof rows)[number]>[] = [
@@ -70,10 +72,31 @@ const rows = [
 ];
 
 const Coding = () => {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await fetch('http://localhost:8080/coding/logs');
+      const data = await res.json();
+      console.log(data);
+    };
+    
+    // getData();
+  }, []);
+
+  const closeModal = () => {
+    setOpen(false);
+  };
+
+  const openHandler = (res: boolean) => {
+    setOpen(res);
+  };
+
   return (
     <Grid container spacing={3}>
+      <InputDisplay open={open} onClose={closeModal} />
       <Grid item xs={12}>
-        <Display title="LeetCode">
+        <Display title="LeetCode" addButton={true} openAdd={openHandler}>
           <Dataframe rows={rows} columns={columns} height={500} />
         </Display>
       </Grid>
