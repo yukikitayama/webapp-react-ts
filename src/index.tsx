@@ -15,6 +15,7 @@ import Work from "./routes/Work";
 import Coding from "./routes/Coding";
 import Music from "./routes/Music";
 import Tennis from "./routes/Tennis";
+import Authentication from "./routes/Authentication";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: "/coding", element: <Coding /> },
       { path: "/music", element: <Music /> },
       { path: "/tennis", element: <Tennis /> },
+      { path: "/auth", element: <Authentication /> },
     ],
   },
 ]);

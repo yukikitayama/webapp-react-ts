@@ -16,6 +16,7 @@ import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 // import PianoIcon from '@mui/icons-material/Piano';
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import CodeIcon from '@mui/icons-material/Code';
+import LoginIcon from '@mui/icons-material/Login';
 
 import { drawerWidth } from '../parameters/parameters';
 
@@ -55,6 +56,12 @@ const listItems = (
         <SportsTennisIcon sx={{ color: "white" }} />
       </ListItemIcon>
       <ListItemText primary="Tennis" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/auth">
+      <ListItemIcon>
+        <LoginIcon sx={{ color: "white" }} />
+      </ListItemIcon>
+      <ListItemText primary="Login" />
     </ListItemButton>
   </React.Fragment>
 );

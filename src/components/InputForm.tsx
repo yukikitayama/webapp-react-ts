@@ -9,6 +9,7 @@ import Select, { type SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
 import { codingPickedFroms } from "../parameters/parameters";
+import { getLocalDate } from "../utils/datetime";
 
 type InputFormProps = {
   onClose: () => void;
@@ -20,25 +21,61 @@ const FormGrid = styled(Grid)(() => ({
 }));
 
 const InputForm = ({ onClose }: InputFormProps) => {
-  const [date, setDate] = useState<string>("");
-  const [number, setNumber] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
+  const [date, setDate] = useState<string>(getLocalDate());
+  const [number, setNumber] = useState<string | null>(null);
+  const [title, setTitle] = useState<string | null>(null);
   const [level, setLevel] = useState("easy");
   const [language, setLanguage] = useState("python");
-  const [understanding, setUnderstanding] = useState<number | undefined>(undefined);
-  const [minuteSpent, setMinuteSpent] = useState<number | null>();
-  const [firstTime, setFirstTime] = useState<number | null>();
-  const [optimized, setOptimized] = useState<number | null>();
-  const [sawSolution, setSawSolution] = useState<number | null>();
-  const [needReview, setNeedReview] = useState<number | null>();
-  const [noEditorial, setNoEditorial] = useState<number | null>();
-  const [goodProblem, setGoodProblem] = useState<number | null>();
-  const [topics, setTopics] = useState("");
+  const [understanding, setUnderstanding] = useState<number | null>(null);
+  const [minuteSpent, setMinuteSpent] = useState<number | null>(null);
+  const [firstTime, setFirstTime] = useState<number | null>(null);
+  const [optimized, setOptimized] = useState<number | null>(null);
+  const [sawSolution, setSawSolution] = useState<number | null>(null);
+  const [needReview, setNeedReview] = useState<number | null>(null);
+  const [noEditorial, setNoEditorial] = useState<number | null>(null);
+  const [goodProblem, setGoodProblem] = useState<number | null>(null);
+  const [topics, setTopics] = useState<string | null>(null);
   const [pickedFrom, setPickedFrom] = useState("daily-challenge");
-  const [comment, setComment] = useState("");
-  const [resource, setResource] = useState("");
+  const [comment, setComment] = useState<string | null>(null);
+  const [resource, setResource] = useState<string | null>(null);
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
+    const body = JSON.stringify({
+      date: date,
+      number: number,
+      level: level,
+      language: language,
+      title: title,
+      topics: topics,
+      pickedFrom: pickedFrom,
+      understanding: understanding,
+      minuteSpent: minuteSpent,
+      firstTime: firstTime,
+      optimized: optimized,
+      sawSolution: sawSolution,
+      needReview: needReview,
+      noEditorial: noEditorial,
+      goodProblem: goodProblem,
+      comment: comment,
+      resource: resource,
+    });
+
+    // console.log(body);
+
+    try {
+      const response = await fetch("http://localhost:8080/coding/log", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      });
+      const json = await response.json();
+      console.log(json);
+    } catch (e) {
+      console.log(e);
+    }
+
     onClose();
   };
 
@@ -78,7 +115,7 @@ const InputForm = ({ onClose }: InputFormProps) => {
           name="number"
           type="text"
           required
-          value={number}
+          value={number || ""}
           onChange={(e) => setNumber(e.target.value)}
         />
       </FormGrid>
@@ -113,23 +150,27 @@ const InputForm = ({ onClose }: InputFormProps) => {
           name="title"
           type="title"
           required
-          value={title}
+          value={title || ""}
           onChange={(e) => setTitle(e.target.value)}
         />
       </FormGrid>
       <FormGrid item xs={12} md={6}>
-        <FormLabel htmlFor="topics" required>Topics</FormLabel>
+        <FormLabel htmlFor="topics" required>
+          Topics
+        </FormLabel>
         <OutlinedInput
           id="topics"
           name="topics"
           type="text"
-          value={topics}
+          value={topics || ""}
           required
           onChange={(e) => setTopics(e.target.value)}
         />
       </FormGrid>
       <FormGrid item xs={12} md={6}>
-        <FormLabel htmlFor="pickedFrom" required>Picked from</FormLabel>
+        <FormLabel htmlFor="pickedFrom" required>
+          Picked from
+        </FormLabel>
         <Select value={pickedFrom} onChange={pickedFromChangeHandler}>
           {codingPickedFroms.map((e) => (
             <MenuItem value={e.value} key={e.value}>
@@ -144,7 +185,7 @@ const InputForm = ({ onClose }: InputFormProps) => {
           id="understanding"
           name="understanding"
           type="number"
-          value={understanding}
+          value={understanding === 0 ? 0 : understanding || ""}
           onChange={(e) => setUnderstanding(+e.target.value)}
           endAdornment={<InputAdornment position="end">%</InputAdornment>}
         />
@@ -155,7 +196,7 @@ const InputForm = ({ onClose }: InputFormProps) => {
           id="minuteSpent"
           name="minuteSpent"
           type="number"
-          value={minuteSpent}
+          value={minuteSpent === 0 ? 0 : minuteSpent || ""}
           onChange={(e) => setMinuteSpent(+e.target.value)}
         />
       </FormGrid>
@@ -165,7 +206,7 @@ const InputForm = ({ onClose }: InputFormProps) => {
           id="firstTime"
           name="firstTime"
           type="number"
-          value={firstTime}
+          value={firstTime === 0 ? 0 : firstTime || ""}
           onChange={(e) => setFirstTime(+e.target.value)}
         />
       </FormGrid>
@@ -175,7 +216,7 @@ const InputForm = ({ onClose }: InputFormProps) => {
           id="optimized"
           name="optimized"
           type="number"
-          value={optimized}
+          value={optimized === 0 ? 0 : optimized || ""}
           onChange={(e) => setOptimized(+e.target.value)}
         />
       </FormGrid>
@@ -185,7 +226,7 @@ const InputForm = ({ onClose }: InputFormProps) => {
           id="sawSolution"
           name="sawSolution"
           type="number"
-          value={sawSolution}
+          value={sawSolution === 0 ? 0 : sawSolution || ""}
           onChange={(e) => setSawSolution(+e.target.value)}
         />
       </FormGrid>
@@ -195,7 +236,7 @@ const InputForm = ({ onClose }: InputFormProps) => {
           id="needReview"
           name="needReview"
           type="number"
-          value={needReview}
+          value={needReview === 0 ? 0 : needReview || ""}
           onChange={(e) => setNeedReview(+e.target.value)}
         />
       </FormGrid>
@@ -205,7 +246,7 @@ const InputForm = ({ onClose }: InputFormProps) => {
           id="noEditorial"
           name="noEditorial"
           type="number"
-          value={noEditorial}
+          value={noEditorial === 0 ? 0 : noEditorial || ""}
           onChange={(e) => setNoEditorial(+e.target.value)}
         />
       </FormGrid>
@@ -215,7 +256,7 @@ const InputForm = ({ onClose }: InputFormProps) => {
           id="goodProblem"
           name="goodProblem"
           type="number"
-          value={goodProblem}
+          value={goodProblem === 0 ? 0 : goodProblem || ""}
           onChange={(e) => setGoodProblem(+e.target.value)}
         />
       </FormGrid>
@@ -225,7 +266,7 @@ const InputForm = ({ onClose }: InputFormProps) => {
           id="comment"
           name="comment"
           type="text"
-          value={comment}
+          value={comment || ""}
           onChange={(e) => setComment(e.target.value)}
           multiline={true}
         />
@@ -236,7 +277,7 @@ const InputForm = ({ onClose }: InputFormProps) => {
           id="resource"
           name="resource"
           type="text"
-          value={resource}
+          value={resource || ""}
           onChange={(e) => setResource(e.target.value)}
           multiline={true}
         />

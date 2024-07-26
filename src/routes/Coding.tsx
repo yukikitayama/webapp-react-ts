@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { GridColDef } from "@mui/x-data-grid";
 
@@ -6,10 +6,76 @@ import Display from "../components/Display";
 import Dataframe from "../components/Dataframe";
 import InputDisplay from "../components/InputDisplay";
 
+type Log = {
+  _id: string;
+  date: string;
+  number: string;
+  level: string;
+  language: string;
+  topics: string;
+  pickedFrom: string;
+  understanding: number;
+  minuteSpent: number;
+  firstTime: number;
+  optimized: number;
+  sawSolution: number;
+  noEditorial: number;
+  goodProblem: number;
+  comment: string;
+  resource: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+// const rows = [
+//   {
+//     id: 1,
+//     leetcodeNumber: 1598,
+//     title: "Crawler Log Folder",
+//     date: "2024-07-10",
+//     understanding: 1,
+//     minuteSpent: 4,
+//     firstTime: 1,
+//     optimized: 0,
+//     sawSolution: 0,
+//     needReview: 1,
+//     topics: "stack, balance",
+//     level: "easy",
+//     language: "python",
+//     pickedFrom: "daily challenge",
+//     noEditorial: 0,
+//     comment: "",
+//     goodProblem: null,
+//     resource: null,
+//   },
+//   {
+//     id: 2,
+//     leetcodeNumber: 1598,
+//     title: "Crawler Log Folder",
+//     date: "2024-07-10",
+//     understanding: 1,
+//     minuteSpent: null,
+//     firstTime: 0,
+//     optimized: 1,
+//     sawSolution: 0,
+//     needReview: 1,
+//     topics: "stack, balance",
+//     level: "easy",
+//     language: "c++",
+//     pickedFrom: "daily challenge",
+//     noEditorial: 0,
+//     comment: "",
+//     goodProblem: null,
+//     resource: null,
+//   },
+// ];
+
 // https://stackoverflow.com/questions/59541521/whats-the-meaning-of-typeof-arraynumber-in-typescript
-const columns: GridColDef<(typeof rows)[number]>[] = [
-  // { field: "id", headerName: "ID" },
-  { field: "leetcodeNumber", headerName: "Number", type: "number" },
+// const columns: GridColDef<(typeof rows)[number]>[] = [
+const columns: GridColDef<Log>[] = [
+    // { field: "id", headerName: "ID" },
+  { field: "number", headerName: "Number", type: "number" },
   { field: "title", headerName: "Title", width: 200 },
   { field: "date", headerName: "Date" },
   { field: "level", headerName: "Level" },
@@ -28,60 +94,19 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
   { field: "resource", headerName: "Resource" },
 ];
 
-const rows = [
-  {
-    id: 1,
-    leetcodeNumber: 1598,
-    title: "Crawler Log Folder",
-    date: "2024-07-10",
-    understanding: 1,
-    minuteSpent: 4,
-    firstTime: 1,
-    optimized: 0,
-    sawSolution: 0,
-    needReview: 1,
-    topics: "stack, balance",
-    level: "easy",
-    language: "python",
-    pickedFrom: "daily challenge",
-    noEditorial: 0,
-    comment: "",
-    goodProblem: null,
-    resource: null,
-  },
-  {
-    id: 2,
-    leetcodeNumber: 1598,
-    title: "Crawler Log Folder",
-    date: "2024-07-10",
-    understanding: 1,
-    minuteSpent: null,
-    firstTime: 0,
-    optimized: 1,
-    sawSolution: 0,
-    needReview: 1,
-    topics: "stack, balance",
-    level: "easy",
-    language: "c++",
-    pickedFrom: "daily challenge",
-    noEditorial: 0,
-    comment: "",
-    goodProblem: null,
-    resource: null,
-  },
-];
-
 const Coding = () => {
   const [open, setOpen] = useState(false);
+  const [logs, setLogs] = useState<Log[]>([]);
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch('http://localhost:8080/coding/logs');
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/coding/logs`);
       const data = await res.json();
-      console.log(data);
+      const fetchedLogs = data.logs.map((log: Log) => ({...log, id: log._id}));
+      setLogs(fetchedLogs);
     };
-    
-    // getData();
+
+    getData();
   }, []);
 
   const closeModal = () => {
@@ -97,7 +122,7 @@ const Coding = () => {
       <InputDisplay open={open} onClose={closeModal} />
       <Grid item xs={12}>
         <Display title="LeetCode" addButton={true} openAdd={openHandler}>
-          <Dataframe rows={rows} columns={columns} height={500} />
+          <Dataframe rows={logs} columns={columns} height={500} />
         </Display>
       </Grid>
     </Grid>

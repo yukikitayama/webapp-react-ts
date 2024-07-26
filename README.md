@@ -27,3 +27,5 @@ react-router-dom
 - https://blog.postman.com/how-to-create-a-rest-api-with-node-js-and-express/
 - https://github.com/mui/material-ui/tree/v5.16.1/docs/data/material/getting-started/templates/checkout
 - https://mui.com/material-ui/getting-started/templates/checkout/
+- https://stackoverflow.com/questions/47642449/initializing-react-number-input-control-with-blank-value
+- https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd
