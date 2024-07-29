@@ -9,7 +9,14 @@
 @mui/icons-material
 @mui/x-data-grid
 react-router-dom
+@reduxjs/toolkit
+react-redux
 ```
+
+## Task
+
+- Make some page private, and can see if you are logged in.
+- Automatically clear locally stored token when token is expired.
 
 ## TypeScript
 

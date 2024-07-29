@@ -10,6 +10,8 @@ import MenuItem from "@mui/material/MenuItem";
 
 import { codingPickedFroms } from "../parameters/parameters";
 import { getLocalDate } from "../utils/datetime";
+import { getAuthToken } from "../utils/auth";
+import { useCustomSelector } from "../store/hooks";
 
 type InputFormProps = {
   onClose: () => void;
@@ -38,6 +40,7 @@ const InputForm = ({ onClose }: InputFormProps) => {
   const [pickedFrom, setPickedFrom] = useState("daily-challenge");
   const [comment, setComment] = useState<string | null>(null);
   const [resource, setResource] = useState<string | null>(null);
+  const isAuth = useCustomSelector((state) => state.auth.isAuthenticated);
 
   const submitHandler = async () => {
     const body = JSON.stringify({
@@ -60,14 +63,15 @@ const InputForm = ({ onClose }: InputFormProps) => {
       resource: resource,
     });
 
-    // console.log(body);
-
     try {
-      const response = await fetch("http://localhost:8080/coding/log", {
+      const token = getAuthToken();
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token + "xxx",
+      };
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/coding/log`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: headers,
         body: body,
       });
       const json = await response.json();
@@ -289,7 +293,7 @@ const InputForm = ({ onClose }: InputFormProps) => {
         </Button>
       </FormGrid>
       <FormGrid item xs={12} md={6}>
-        <Button variant="contained" onClick={submitHandler}>
+        <Button variant="contained" onClick={submitHandler} disabled={!isAuth}>
           Add
         </Button>
       </FormGrid>

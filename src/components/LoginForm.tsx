@@ -5,6 +5,8 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useCustomDispatch } from "../store/hooks";
+import { login } from "../store/auth-slice";
 
 type RequestData = {
   email: string;
@@ -18,6 +20,7 @@ type ResponseData = {
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useCustomDispatch();
 
   const formSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -49,7 +52,12 @@ const LoginForm = () => {
     // Extract token from API
     const responseData: ResponseData = await response.json();
 
-    console.log(responseData);
+    // Save token to local storage
+    const token = responseData.token;
+    localStorage.setItem("token", token);
+
+    // Change authenticated Redux state
+    dispatch(login(token));
 
     setIsLoading(false);
 

@@ -17,6 +17,7 @@ import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import CodeIcon from '@mui/icons-material/Code';
 import LoginIcon from '@mui/icons-material/Login';
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 
 import { drawerWidth } from '../parameters/parameters';
 
@@ -56,6 +57,12 @@ const listItems = (
         <SportsTennisIcon sx={{ color: "white" }} />
       </ListItemIcon>
       <ListItemText primary="Tennis" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/asset">
+      <ListItemIcon>
+        <MonetizationOnIcon sx={{ color: "white" }} />
+      </ListItemIcon>
+      <ListItemText primary="Asset" />
     </ListItemButton>
     <ListItemButton component={Link} to="/auth">
       <ListItemIcon>

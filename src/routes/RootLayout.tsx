@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import { indigo, blueGrey } from '@mui/material/colors';
 
@@ -40,7 +41,7 @@ const RootLayout = () => {
     <ThemeProvider theme={defaultTheme}>
       {/* This display: flex can place navigation, menu and content nicely */}
       <Box sx={{ display: 'flex' }}>
-        {/* <CssBaseline /> */}
+        <CssBaseline />
         <Navigation open={open} toggleDrawer={toggleDrawer} />
         <Menu open={open} toggleDrawer={toggleDrawer} />
         <Content />
