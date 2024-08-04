@@ -4,11 +4,15 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 
+import { useCustomDispatch } from "../store/hooks";
+import { openFormDialog } from "../store/layout-slice";
+import { FormType } from "../store/layout-slice";
+
 type DisplayProps = {
   title: string;
   children: ReactNode;
   addButton?: boolean;
-  openAdd?: (e: boolean) => void;
+  formType?: FormType;
 };
 
 const DisplayStyle = {
@@ -18,9 +22,7 @@ const DisplayStyle = {
 };
 
 const Display = ({ title, children, ...props }: DisplayProps) => {
-  const OpenInputFormHandler = () => {
-    props.openAdd!(true);
-  };
+  const dispatch = useCustomDispatch();
 
   const titleWithAdd = (
     <Grid container>
@@ -30,7 +32,7 @@ const Display = ({ title, children, ...props }: DisplayProps) => {
         </Typography>
       </Grid>
       <Grid item xs={3} md={1} mb={1}>
-        <Button variant="contained" onClick={OpenInputFormHandler}>Add</Button>
+        <Button variant="contained" onClick={() => dispatch(openFormDialog(props.formType!))}>Add</Button>
       </Grid>
     </Grid>
   );

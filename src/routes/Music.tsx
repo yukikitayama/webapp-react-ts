@@ -1,12 +1,26 @@
+import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
 import Display from "../components/Display";
 import SimpleTable from "../components/SimpleTable";
 
+type Performance = {
+  _id: string;
+  date: string;
+  title: string;
+  composer: string;
+  event: string;
+  location: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
 const columnsLearning = ["Start date", "End date", "Name", "Platform", "Topic"];
-const columnsMyPerformance = ["Date", "Piece", "Composer", "Event", "Location"];
+const columnsMyPerformance = ["Date", "Title", "Composer", "Event", "Location"];
 const columnsConcert = ["Date", "Name", "Location", "Organization"];
+const columnsPractice = ["Start date", "end date", "Title", "Composer"];
 
 const rowsLearning = [
   {
@@ -34,24 +48,6 @@ const rowsLearning = [
     topic: "Music theory",
   },
 ];
-const rowsMyPerformance = [
-  {
-    id: "0",
-    date: "2024-02-17",
-    piece: "Energy Flow",
-    composer: "Ryuichi Sakamoto",
-    event: "BAMC February 2024",
-    location: "Berkeley Piano Club",
-  },
-  {
-    id: "1",
-    date: "2024-03-24",
-    piece: "Energy Flow",
-    composer: "Ryuichi Sakamoto",
-    event: "NMSM",
-    location: "Unitarian Universalist Church of Palo Alto",
-  },
-];
 
 const rowsConcert = [
   {
@@ -68,6 +64,23 @@ const rowsConcert = [
     location: "Calvary Presbyterian Church",
     organization: "San Francisco Bach Choir",
   },
+];
+
+const rowsPractice = [
+  {
+    id: "0",
+    startDate: "2024-03-14",
+    endDate: "2024-06-22",
+    title: "River Flows in You",
+    composer: "Yiruma"
+  },
+  {
+    id: "1",
+    startDate: "2024-03-16",
+    endDate: "",
+    title: "Kiss the Rain",
+    composer: "Yiruma"
+  }
 ];
 
 const overview = (
@@ -107,8 +120,30 @@ const overview = (
 );
 
 const Music = () => {
+  const [performances, setPerformances] = useState<Performance[]>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/music/performances`
+      );
+      const data = await res.json();
+      const fetchedData = data.performances.map((performance: Performance) => ({
+        id: performance._id,
+        date: performance.date,
+        title: performance.title,
+        composer: performance.composer,
+        event: performance.event,
+        location: performance.location,
+      }));
+      setPerformances(fetchedData);
+    };
+
+    getData();
+  }, []);
+
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={2}>
       <Grid item xs={12} md={5}>
         <Display title="Overview">{overview}</Display>
       </Grid>
@@ -118,19 +153,18 @@ const Music = () => {
         </Display>
       </Grid>
       <Grid item xs={12}>
-        <Display title="My performance">
-          <SimpleTable
-            columns={columnsMyPerformance}
-            rows={rowsMyPerformance}
-          />
+        <Display title="My performance" addButton={true} formType="performance">
+          <SimpleTable columns={columnsMyPerformance} rows={performances} />
         </Display>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} md={6}>
         <Display title="Concerts">
-          <SimpleTable
-            columns={columnsConcert}
-            rows={rowsConcert}
-          />
+          <SimpleTable columns={columnsConcert} rows={rowsConcert} />
+        </Display>
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <Display title="Practice">
+          <SimpleTable columns={columnsPractice} rows={rowsPractice} />
         </Display>
       </Grid>
     </Grid>

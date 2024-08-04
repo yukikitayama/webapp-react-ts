@@ -1,5 +1,5 @@
 import { type FormEvent, useState } from "react";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
@@ -21,6 +21,7 @@ type ResponseData = {
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useCustomDispatch();
+  const navigate = useNavigate();
 
   const formSubmitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -61,8 +62,7 @@ const LoginForm = () => {
 
     setIsLoading(false);
 
-    // Not working...
-    redirect("/");
+    navigate("/");
   };
 
   return (

@@ -36,3 +36,6 @@ react-redux
 - https://mui.com/material-ui/getting-started/templates/checkout/
 - https://stackoverflow.com/questions/47642449/initializing-react-number-input-control-with-blank-value
 - https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd
+- https://prismic.io/blog/react-component-libraries
+- https://nextui.org/docs/customization/colors
+- https://mui.com/material-ui/react-dialog/#form-dialogs

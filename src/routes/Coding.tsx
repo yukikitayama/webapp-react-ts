@@ -4,7 +4,6 @@ import { GridColDef } from "@mui/x-data-grid";
 
 import Display from "../components/Display";
 import Dataframe from "../components/Dataframe";
-import InputDisplay from "../components/InputDisplay";
 
 type Log = {
   _id: string;
@@ -119,9 +118,8 @@ const Coding = () => {
 
   return (
     <Grid container spacing={3}>
-      <InputDisplay open={open} onClose={closeModal} />
       <Grid item xs={12}>
-        <Display title="LeetCode" addButton={true} openAdd={openHandler}>
+        <Display title="LeetCode" addButton={true} formType="leetcode">
           <Dataframe rows={logs} columns={columns} height={500} />
         </Display>
       </Grid>

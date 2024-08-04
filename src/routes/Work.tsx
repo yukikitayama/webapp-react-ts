@@ -55,7 +55,6 @@ const overview = (
             <ul>
               <li>Satoshi</li>
               <li>Toshiya</li>
-              <li>Yoshi</li>
             </ul>
           </li>
           <li>Complete Udemy <b>Beginning C++ Programming - From Beginner to Beyond</b></li>
