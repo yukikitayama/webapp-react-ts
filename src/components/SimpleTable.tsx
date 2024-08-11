@@ -19,13 +19,13 @@ const dataToElement = (row: any) => {
   let key: keyof any;
 
   for (key in row) {
-    if (key !== "id") {
+    if (key !== "_id") {
       const value = row[key];
       cells.push(<TableCell key={key}>{value}</TableCell>);
     }
   }
 
-  return <TableRow key={row.id}>{cells}</TableRow>;
+  return <TableRow key={row._id}>{cells}</TableRow>;
 };
 
 const SimpleTable = ({ columns, rows }: SimpleTableProps) => {

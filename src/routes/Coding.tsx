@@ -27,49 +27,6 @@ type Log = {
   __v: number;
 };
 
-// const rows = [
-//   {
-//     id: 1,
-//     leetcodeNumber: 1598,
-//     title: "Crawler Log Folder",
-//     date: "2024-07-10",
-//     understanding: 1,
-//     minuteSpent: 4,
-//     firstTime: 1,
-//     optimized: 0,
-//     sawSolution: 0,
-//     needReview: 1,
-//     topics: "stack, balance",
-//     level: "easy",
-//     language: "python",
-//     pickedFrom: "daily challenge",
-//     noEditorial: 0,
-//     comment: "",
-//     goodProblem: null,
-//     resource: null,
-//   },
-//   {
-//     id: 2,
-//     leetcodeNumber: 1598,
-//     title: "Crawler Log Folder",
-//     date: "2024-07-10",
-//     understanding: 1,
-//     minuteSpent: null,
-//     firstTime: 0,
-//     optimized: 1,
-//     sawSolution: 0,
-//     needReview: 1,
-//     topics: "stack, balance",
-//     level: "easy",
-//     language: "c++",
-//     pickedFrom: "daily challenge",
-//     noEditorial: 0,
-//     comment: "",
-//     goodProblem: null,
-//     resource: null,
-//   },
-// ];
-
 // https://stackoverflow.com/questions/59541521/whats-the-meaning-of-typeof-arraynumber-in-typescript
 // const columns: GridColDef<(typeof rows)[number]>[] = [
 const columns: GridColDef<Log>[] = [

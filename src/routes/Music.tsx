@@ -24,7 +24,7 @@ const columnsPractice = ["Start date", "end date", "Title", "Composer"];
 
 const rowsLearning = [
   {
-    id: "0",
+    _id: "0",
     startDate: "2024-05-17",
     endDate: "2024-06-06",
     name: "Music composition 1",
@@ -32,7 +32,7 @@ const rowsLearning = [
     topic: "Music composition",
   },
   {
-    id: "1",
+    _id: "1",
     startDate: "2024-06-07",
     endDate: "",
     name: "Music composition 2",
@@ -40,7 +40,7 @@ const rowsLearning = [
     topic: "Music composition",
   },
   {
-    id: "2",
+    _id: "2",
     startDate: "2024-07-02",
     endDate: "",
     name: "Music theory",
@@ -51,14 +51,14 @@ const rowsLearning = [
 
 const rowsConcert = [
   {
-    id: "0",
+    _id: "0",
     date: "2024-06-11",
     name: "Monty Alexander",
     location: "Miner Auditorium",
     organization: "SFJAZZ",
   },
   {
-    id: "1",
+    _id: "1",
     date: "2024-05-19",
     name: "J.S. Bach St. John Passion BWV 245",
     location: "Calvary Presbyterian Church",
@@ -68,14 +68,14 @@ const rowsConcert = [
 
 const rowsPractice = [
   {
-    id: "0",
+    _id: "0",
     startDate: "2024-03-14",
     endDate: "2024-06-22",
     title: "River Flows in You",
     composer: "Yiruma"
   },
   {
-    id: "1",
+    _id: "1",
     startDate: "2024-03-16",
     endDate: "",
     title: "Kiss the Rain",
@@ -129,7 +129,7 @@ const Music = () => {
       );
       const data = await res.json();
       const fetchedData = data.performances.map((performance: Performance) => ({
-        id: performance._id,
+        _id: performance._id,
         date: performance.date,
         title: performance.title,
         composer: performance.composer,
