@@ -18,6 +18,7 @@ import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import CodeIcon from '@mui/icons-material/Code';
 import LoginIcon from '@mui/icons-material/Login';
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 
 import { drawerWidth } from '../parameters/parameters';
 
@@ -33,6 +34,12 @@ const listItems = (
         <DashboardIcon sx={{ color: "white" }} />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
+    </ListItemButton>
+    <ListItemButton component={Link} to="/life" >
+      <ListItemIcon>
+        <MonitorHeartIcon sx={{ color: "white" }} />
+      </ListItemIcon>
+      <ListItemText primary="Life" />
     </ListItemButton>
     <ListItemButton component={Link} to="/work" >
       <ListItemIcon>

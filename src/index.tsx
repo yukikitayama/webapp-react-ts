@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 
 import RootLayout from "./routes/RootLayout";
 import Dashboard from "./routes/Dashboard";
+import Life from "./routes/Life";
 import Work from "./routes/Work";
 import Coding from "./routes/Coding";
 import Music from "./routes/Music";
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Dashboard /> },
       { path: "/dashboard", element: <Dashboard /> },
+      { path: "/life", element: <Life /> },
       { path: "/work", element: <Work /> },
       { path: "/coding", element: <Coding /> },
       { path: "/music", element: <Music /> },
