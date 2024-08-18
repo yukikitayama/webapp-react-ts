@@ -39,3 +39,4 @@ react-redux
 - https://prismic.io/blog/react-component-libraries
 - https://nextui.org/docs/customization/colors
 - https://mui.com/material-ui/react-dialog/#form-dialogs
+- https://stackoverflow.com/questions/37838778/destructuring-object-and-ignore-one-of-the-results

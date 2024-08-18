@@ -1,9 +1,19 @@
 import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import Display from "../components/Display";
 import SimpleTable from "../components/SimpleTable";
+
+type Learning = {
+  _id: string;
+  startDate: string;
+  endDate: string;
+  name: string;
+  platform: string;
+  topic: string;
+};
 
 type Performance = {
   _id: string;
@@ -12,76 +22,32 @@ type Performance = {
   composer: string;
   event: string;
   location: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
+};
+
+type Concert = {
+  _id: string;
+  date: string;
+  event: string;
+  artist: string;
+  organization: string;
+  location: string;
+};
+
+type Practice = {
+  _id: string;
+  startDate: string;
+  endDate: string;
+  title: string;
+  composer: string;
 };
 
 const columnsLearning = ["Start date", "End date", "Name", "Platform", "Topic"];
 const columnsMyPerformance = ["Date", "Title", "Composer", "Event", "Location"];
-const columnsConcert = ["Date", "Name", "Location", "Organization"];
+const columnsConcert = ["Date", "Event", "Artist", "Organization", "Location"];
 const columnsPractice = ["Start date", "end date", "Title", "Composer"];
-
-const rowsLearning = [
-  {
-    _id: "0",
-    startDate: "2024-05-17",
-    endDate: "2024-06-06",
-    name: "Music composition 1",
-    platform: "Udemy",
-    topic: "Music composition",
-  },
-  {
-    _id: "1",
-    startDate: "2024-06-07",
-    endDate: "",
-    name: "Music composition 2",
-    platform: "Udemy",
-    topic: "Music composition",
-  },
-  {
-    _id: "2",
-    startDate: "2024-07-02",
-    endDate: "",
-    name: "Music theory",
-    platform: "Udemy",
-    topic: "Music theory",
-  },
-];
-
-const rowsConcert = [
-  {
-    _id: "0",
-    date: "2024-06-11",
-    name: "Monty Alexander",
-    location: "Miner Auditorium",
-    organization: "SFJAZZ",
-  },
-  {
-    _id: "1",
-    date: "2024-05-19",
-    name: "J.S. Bach St. John Passion BWV 245",
-    location: "Calvary Presbyterian Church",
-    organization: "San Francisco Bach Choir",
-  },
-];
-
-const rowsPractice = [
-  {
-    _id: "0",
-    startDate: "2024-03-14",
-    endDate: "2024-06-22",
-    title: "River Flows in You",
-    composer: "Yiruma"
-  },
-  {
-    _id: "1",
-    startDate: "2024-03-16",
-    endDate: "",
-    title: "Kiss the Rain",
-    composer: "Yiruma"
-  }
-];
 
 const overview = (
   <Typography component="div">
@@ -120,26 +86,63 @@ const overview = (
 );
 
 const Music = () => {
+  const [learnings, setLearnings] = useState<Learning[]>([]);
   const [performances, setPerformances] = useState<Performance[]>([]);
+  const [concerts, setConcerts] = useState<Concert[]>([]);
+  const [practices, setPractices] = useState<Practice[]>([]);
+  const [isLearningLoading, setIsLearningLoading] = useState<boolean>(false);
+  const [isPerformanceLoading, setIsPerformanceLoading] =
+    useState<boolean>(false);
+  const [isConertLoading, setIsConertLoading] = useState<boolean>(false);
+  const [isPracticeLoading, setIsPracticeLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    const getData = async () => {
-      const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/music/performances`
-      );
+    const getData = async (
+      url: string,
+      stateFunction: (data: any) => void,
+      key: string
+    ) => {
+      const res = await fetch(url);
       const data = await res.json();
-      const fetchedData = data.performances.map((performance: Performance) => ({
-        _id: performance._id,
-        date: performance.date,
-        title: performance.title,
-        composer: performance.composer,
-        event: performance.event,
-        location: performance.location,
-      }));
-      setPerformances(fetchedData);
+      // Exclude unnecessary columns in API response
+      const tableData = data[key].map((element: any) => {
+        const {createdAt, updatedAt, __v, ...rest} = element;
+        return rest;
+      })
+      stateFunction(tableData);
     };
 
-    getData();
+    setIsLearningLoading(true);
+    getData(
+      `${process.env.REACT_APP_API_URL}/music/learnings`,
+      setLearnings,
+      "learnings"
+    );
+    setIsLearningLoading(false);
+
+    setIsPerformanceLoading(true);
+    getData(
+      `${process.env.REACT_APP_API_URL}/music/performances`,
+      setPerformances,
+      "performances"
+    );
+    setIsPerformanceLoading(false);
+
+    setIsConertLoading(true);
+    getData(
+      `${process.env.REACT_APP_API_URL}/music/concerts`,
+      setConcerts,
+      "concerts"
+    );
+    setIsConertLoading(false);
+
+    setIsPracticeLoading(true);
+    getData(
+      `${process.env.REACT_APP_API_URL}/music/practices`,
+      setPractices,
+      "practices"
+    );
+    setIsPracticeLoading(false);
   }, []);
 
   return (
@@ -149,22 +152,34 @@ const Music = () => {
       </Grid>
       <Grid item xs={12} md={7}>
         <Display title="Learning">
-          <SimpleTable columns={columnsLearning} rows={rowsLearning} />
+          {!isLearningLoading && (
+            <SimpleTable columns={columnsLearning} rows={learnings} />
+          )}
+          {isLearningLoading && <CircularProgress />}
         </Display>
       </Grid>
       <Grid item xs={12}>
         <Display title="My performance" addButton={true} formType="performance">
-          <SimpleTable columns={columnsMyPerformance} rows={performances} />
+          {!isPerformanceLoading && (
+            <SimpleTable columns={columnsMyPerformance} rows={performances} />
+          )}
+          {isPerformanceLoading && <CircularProgress />}
         </Display>
       </Grid>
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12}>
         <Display title="Concerts">
-          <SimpleTable columns={columnsConcert} rows={rowsConcert} />
+          {!isConertLoading && (
+            <SimpleTable columns={columnsConcert} rows={concerts} />
+          )}
+          {isConertLoading && <CircularProgress />}
         </Display>
       </Grid>
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12}>
         <Display title="Practice">
-          <SimpleTable columns={columnsPractice} rows={rowsPractice} />
+          {!isPracticeLoading && (
+            <SimpleTable columns={columnsPractice} rows={practices} />
+          )}
+          {isPracticeLoading && <CircularProgress />}
         </Display>
       </Grid>
     </Grid>
