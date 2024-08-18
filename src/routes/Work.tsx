@@ -45,7 +45,7 @@ const overview = (
             Solve LeetCode <b>Daily Challenges</b>
           </li>
           <li>
-            Solve LeetCode <b>1 hard problem per day</b>
+            Solve LeetCode at least <b>2 hard problems in the weekend</b>
           </li>
           <li>
             Join LeetCode <b>Contest</b> unless the schedule is blocked
@@ -83,14 +83,18 @@ const overview = (
         Georgia Tech courses
         <ul>
           <li>
-            Get <b>grade A</b> from Machine Learning for Trading
-          </li>
-          <li>
-            Review Reinforcement Learning for Decision Making for <b>retake</b>
+            Study <b>multi-agent reinforcement learning</b> for retake.
           </li>
         </ul>
       </li>
-      <li>Web application</li>
+      <li>Web application
+        <ul>
+          <li>Udemy React - The Complete Guide 2024 (incl. Next.js, Redux)</li>
+          <li>Udemy Next.js 14 & React - The Complete Guide</li>
+          <li>Udemy NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno) for REST API by Node.js and Express.</li>
+          <li>Create React/Next.js/TypeScript project</li>
+        </ul>
+      </li>
       <li>
         Statistics and ML
         <ul>
@@ -105,6 +109,22 @@ const overview = (
           <li>
             Read <b>System Design Interview by Alex Xu</b>
           </li>
+        </ul>
+      </li>
+      <li>
+        Gantri
+        <ul>
+          <li>Spark</li>
+          <li>Data visualization (Tableau, PowerBI, Looker, Grafana)</li>
+          <li>e-commerce data</li>
+          <li>Manufacturing data</li>
+          <li>MQTT</li>
+        </ul>
+      </li>
+      <li>
+        Curiosity
+        <ul>
+          <li>Bazel (https://bazel.build/start/cpp)</li>
         </ul>
       </li>
     </ul>
