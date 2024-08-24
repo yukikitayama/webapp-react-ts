@@ -44,7 +44,7 @@ const RootLayout = () => {
   return (
     <ThemeProvider theme={defaultTheme}>
       {/* This display: flex can place navigation, menu and content nicely */}
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex' }} component="div">
         <CssBaseline />
         <FormDialog />
         <Navigation open={open} toggleDrawer={toggleDrawer} />

@@ -19,7 +19,7 @@ const initialState = {
 
 const Dataframe = ({ rows, columns, height }: DataframeProps) => {
   return (
-    <Box sx={{ height: height, width: "100%" }}>
+    <Box sx={{ height: height, width: "100%" }} component="div">
       <DataGrid
         rows={rows}
         columns={columns}
