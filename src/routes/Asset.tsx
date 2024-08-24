@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/Grid";
 
 import { useCustomSelector } from "../store/hooks";
 import Display from "../components/Display";
@@ -53,9 +54,10 @@ const Asset = () => {
         )}
         {isAuth && (
           <Display title="Overview">
-            <ul>{overviews.map(overview => (
+            {isOverviewLoading && <CircularProgress />}
+            {!isOverviewLoading && <ul>{overviews.map(overview => (
               <li key={overview._id}>{overview.content}</li>
-            ))}</ul>
+            ))}</ul>}
           </Display>
         )}
       </Grid>

@@ -1,18 +1,14 @@
 import { useState } from "react";
 import { styled } from "@mui/system";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
 import FormLabel from "@mui/material/FormLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
-import Button from "@mui/material/Button";
 import Select, { type SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
 import { getLocalDate } from "../../utils/datetime";
 import { codingPickedFroms } from "../../parameters/parameters";
-import { getAuthToken } from "../../utils/auth";
-import { useCustomSelector } from "../../store/hooks";
 
 const FormGrid = styled(Grid)(() => ({
   display: "flex",

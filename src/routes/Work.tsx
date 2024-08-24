@@ -131,14 +131,6 @@ const overview = (
   </Typography>
 );
 
-const project = (
-  <Typography component="div">
-    <ul>
-      <li>React/TypeScript dashboard</li>
-    </ul>
-  </Typography>
-);
-
 const Work = () => {
   const [rowsLearning, setRowsLearning] = useState<Learning[]>([]);
   const [rowsCertification, setRowsCertification] = useState<Certification[]>(

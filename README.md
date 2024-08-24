@@ -26,6 +26,10 @@ react-redux
 - `(typeof ___)[number]`
   - https://stackoverflow.com/questions/59541521/whats-the-meaning-of-typeof-arraynumber-in-typescript
 
+## react-three-fiber
+
+- https://github.com/pmndrs/react-three-fiber/discussions/1752
+
 ## Reference
 
 - https://mui.com/material-ui/getting-started/templates/dashboard/

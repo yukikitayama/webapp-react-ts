@@ -51,7 +51,6 @@ const columns: GridColDef<Log>[] = [
 ];
 
 const Coding = () => {
-  const [open, setOpen] = useState(false);
   const [logs, setLogs] = useState<Log[]>([]);
 
   useEffect(() => {
@@ -64,14 +63,6 @@ const Coding = () => {
 
     getData();
   }, []);
-
-  const closeModal = () => {
-    setOpen(false);
-  };
-
-  const openHandler = (res: boolean) => {
-    setOpen(res);
-  };
 
   return (
     <Grid container spacing={3}>
