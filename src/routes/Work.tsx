@@ -87,11 +87,15 @@ const overview = (
           </li>
         </ul>
       </li>
-      <li>Web application
+      <li>
+        Web application
         <ul>
           <li>Udemy React - The Complete Guide 2024 (incl. Next.js, Redux)</li>
           <li>Udemy Next.js 14 & React - The Complete Guide</li>
-          <li>Udemy NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno) for REST API by Node.js and Express.</li>
+          <li>
+            Udemy NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)
+            for REST API by Node.js and Express.
+          </li>
           <li>Create React/Next.js/TypeScript project</li>
         </ul>
       </li>
@@ -146,36 +150,36 @@ const Work = () => {
     const getData = async (
       url: string,
       stateFunction: (data: any) => void,
-      key: string
+      key: string,
+      loadingFunction: (flag: boolean) => void
     ) => {
+      loadingFunction(true);
       const res = await fetch(url);
       const data = await res.json();
+      loadingFunction(false);
       stateFunction(data[key]);
     };
 
-    setIsLearningLoading(true);
     getData(
       `${process.env.REACT_APP_API_URL}/work/learnings`,
       setRowsLearning,
-      "learnings"
+      "learnings",
+      setIsLearningLoading
     );
-    setIsLearningLoading(false);
 
-    setIsCertificationLoading(true);
     getData(
       `${process.env.REACT_APP_API_URL}/work/certifications`,
       setRowsCertification,
-      "certifications"
+      "certifications",
+      setIsCertificationLoading
     );
-    setIsCertificationLoading(false);
 
-    setIsProjectLoading(true);
     getData(
       `${process.env.REACT_APP_API_URL}/work/projects`,
       setRowsProject,
-      "projects"
+      "projects",
+      setIsProjectLoading
     );
-    setIsProjectLoading(false);
   }, []);
 
   return (

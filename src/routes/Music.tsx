@@ -100,8 +100,11 @@ const Music = () => {
     const getData = async (
       url: string,
       stateFunction: (data: any) => void,
-      key: string
+      key: string,
+      loadingFunction: (flag: boolean) => void
     ) => {
+      loadingFunction(true);
+
       const res = await fetch(url);
       const data = await res.json();
       // Exclude unnecessary columns in API response
@@ -109,40 +112,38 @@ const Music = () => {
         const {createdAt, updatedAt, __v, ...rest} = element;
         return rest;
       })
+      
+      loadingFunction(false);
       stateFunction(tableData);
     };
 
-    setIsLearningLoading(true);
     getData(
       `${process.env.REACT_APP_API_URL}/music/learnings`,
       setLearnings,
-      "learnings"
+      "learnings",
+      setIsLearningLoading
     );
-    setIsLearningLoading(false);
 
-    setIsPerformanceLoading(true);
     getData(
       `${process.env.REACT_APP_API_URL}/music/performances`,
       setPerformances,
-      "performances"
+      "performances",
+      setIsPerformanceLoading
     );
-    setIsPerformanceLoading(false);
 
-    setIsConertLoading(true);
     getData(
       `${process.env.REACT_APP_API_URL}/music/concerts`,
       setConcerts,
-      "concerts"
+      "concerts",
+      setIsConertLoading
     );
-    setIsConertLoading(false);
 
-    setIsPracticeLoading(true);
     getData(
       `${process.env.REACT_APP_API_URL}/music/practices`,
       setPractices,
-      "practices"
+      "practices",
+      setIsPracticeLoading
     );
-    setIsPracticeLoading(false);
   }, []);
 
   return (

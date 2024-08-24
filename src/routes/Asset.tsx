@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
-import CircularProgress from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { useCustomSelector } from "../store/hooks";
 import Display from "../components/Display";
@@ -19,29 +19,33 @@ const Asset = () => {
 
   useEffect(() => {
     const getData = async () => {
+      setIsOverviewLoading(true);
+
       const token = getAuthToken();
       const headers = {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       };
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/asset/overviews`, {
-        method: "GET",
-        headers: headers,
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/asset/overviews`,
+        {
+          method: "GET",
+          headers: headers,
+        }
+      );
       const data = await res.json();
       // Exclude unnecessary columns in API response
       const extractedData = data.overviews.map((element: any) => {
         const { level, ...rest } = element;
         return rest;
       });
+
       setOverviews(extractedData);
+
+      setIsOverviewLoading(false);
     };
 
-    setIsOverviewLoading(true);
-    
     getData();
-    
-    setIsOverviewLoading(false);
   }, []);
 
   return (
@@ -55,9 +59,13 @@ const Asset = () => {
         {isAuth && (
           <Display title="Overview">
             {isOverviewLoading && <CircularProgress />}
-            {!isOverviewLoading && <ul>{overviews.map(overview => (
-              <li key={overview._id}>{overview.content}</li>
-            ))}</ul>}
+            {!isOverviewLoading && (
+              <ul>
+                {overviews.map((overview) => (
+                  <li key={overview._id}>{overview.content}</li>
+                ))}
+              </ul>
+            )}
           </Display>
         )}
       </Grid>

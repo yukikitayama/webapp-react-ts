@@ -53,8 +53,10 @@ const Tennis = () => {
     const getData = async (
       url: string,
       stateFunction: (data: any) => void,
-      key: string
+      key: string,
+      loadingFunction: (flag: boolean) => void
     ) => {
+      loadingFunction(true);
       const res = await fetch(url);
       const data = await res.json();
       // Exclude unnecessary columns in API response
@@ -62,16 +64,16 @@ const Tennis = () => {
         const { createdAt, updatedAt, __v, ...rest } = element;
         return rest;
       });
+      loadingFunction(false);
       stateFunction(tableData);
     };
 
-    setIsTournamentLoading(true);
     getData(
       `${process.env.REACT_APP_API_URL}/tennis/tournaments`,
       setTournaments,
-      "tournaments"
+      "tournaments",
+      setIsTournamentLoading
     );
-    setIsTournamentLoading(false);
   }, []);
 
   return (
