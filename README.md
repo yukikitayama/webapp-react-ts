@@ -26,6 +26,11 @@ react-redux
 - `(typeof ___)[number]`
   - https://stackoverflow.com/questions/59541521/whats-the-meaning-of-typeof-arraynumber-in-typescript
 
+## CSS
+
+- Stick column for MUI table
+  - https://stackoverflow.com/questions/75481613/how-to-make-mui-table-with-sticky-header-and-sticky-column
+
 ## react-three-fiber
 
 - https://github.com/pmndrs/react-three-fiber/discussions/1752

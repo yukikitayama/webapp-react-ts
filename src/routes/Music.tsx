@@ -5,6 +5,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import Display from "../components/Display";
 import SimpleTable from "../components/SimpleTable";
+import Metric from "../components/Metric";
 
 type Learning = {
   _id: string;
@@ -109,10 +110,10 @@ const Music = () => {
       const data = await res.json();
       // Exclude unnecessary columns in API response
       const tableData = data[key].map((element: any) => {
-        const {createdAt, updatedAt, __v, ...rest} = element;
+        const { createdAt, updatedAt, __v, ...rest } = element;
         return rest;
-      })
-      
+      });
+
       loadingFunction(false);
       stateFunction(tableData);
     };
@@ -152,11 +153,8 @@ const Music = () => {
         <Display title="Overview">{overview}</Display>
       </Grid>
       <Grid item xs={12} md={7}>
-        <Display title="Learning">
-          {!isLearningLoading && (
-            <SimpleTable columns={columnsLearning} rows={learnings} />
-          )}
-          {isLearningLoading && <CircularProgress />}
+        <Display title="Metrics">
+          <Metric />
         </Display>
       </Grid>
       <Grid item xs={12}>
@@ -181,6 +179,14 @@ const Music = () => {
             <SimpleTable columns={columnsPractice} rows={practices} />
           )}
           {isPracticeLoading && <CircularProgress />}
+        </Display>
+      </Grid>
+      <Grid item xs={12}>
+        <Display title="Learning">
+          {!isLearningLoading && (
+            <SimpleTable columns={columnsLearning} rows={learnings} />
+          )}
+          {isLearningLoading && <CircularProgress />}
         </Display>
       </Grid>
     </Grid>

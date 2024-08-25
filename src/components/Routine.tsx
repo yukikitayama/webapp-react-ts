@@ -7,6 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import { lightBlue } from "../utils/style";
+import classes from "./Routine.module.css";
 
 function createData(
   startTime: string,
@@ -134,11 +135,11 @@ const nonFreeTime = ["Shower", "Breakfast", "Dinner", "Go to bed", "Work", ""];
 
 const Routine = () => {
   return (
-    <TableContainer component={Paper}>
-      <Table size="small">
+    <TableContainer component={Paper} sx={{ maxHeight: 500 }}>
+      <Table size="small" stickyHeader>
         <TableHead>
           <TableRow>
-            <TableCell>Start time</TableCell>
+            <TableCell className={classes.stickyHeader}>Start time</TableCell>
             <TableCell>Monday</TableCell>
             <TableCell>Tuesday</TableCell>
             <TableCell>Wednesday</TableCell>
@@ -151,7 +152,7 @@ const Routine = () => {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.startTime}>
-              <TableCell>{row.startTime}</TableCell>
+              <TableCell className={classes.sticky}>{row.startTime}</TableCell>
               <TableCell
                 sx={{
                   backgroundColor: !nonFreeTime.includes(row.monday)
